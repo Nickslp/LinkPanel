@@ -1,0 +1,60 @@
+# GitHub Actions workflow to set up Docker, install Docker Compose, and run LinkPanel
+
+name: LinkPanel Docker Deployment
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Set up Docker
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Install Docker Compose manually
+      - name: Install Docker Compose
+        run: |
+          DOCKER_COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
+          sudo curl -L "https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+          docker-compose --version
+
+      # Create docker-compose.yml file
+      - name: Set up Docker Compose file
+        run: |
+          echo "services:
+            app:
+              image: nickslp/linkpanel:latest
+              ports:
+                - '8080:8080'
+              environment:
+                - PORT=8080
+                - DEBUG_MODE=true
+                - PLAIN_PASSWORD=changeme
+              volumes:
+                - linkpanel:/home/node/app/data
+
+          volumes:
+            linkpanel:
+              driver: local" > docker-compose.yml
+
+      # Start services using Docker Compose
+      - name: Start LinkPanel with Docker Compose
+        run: docker-compose up -d
+
+      # Verify the container is running
+      - name: Verify container is running
+        run: docker-compose ps
