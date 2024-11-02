@@ -1,0 +1,90 @@
+/* App.css */
+
+body {
+  background-color: #1e1f22 !important; /* Overall background color */
+  color: #ffffff !important; /* Default text color */
+  margin: 0; /* Remove default margin */
+  font-family: Arial, sans-serif; /* Font family */
+}
+
+.container {
+  background-color: #1e1f22; /* Ensure container has the same background color */
+}
+
+.list-group {
+  background-color: #1e1f22 !important; /* Set the list group background */
+  padding: 0; /* Remove default padding */
+}
+
+.list-group-item {
+  background-color: #1e1f22 !important; /* Ensure row background color */
+  color: #ffffff !important; /* Ensure text color */
+  border: none; /* Remove border for a cleaner look */
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space between link and icon */
+  align-items: center; /* Center items vertically */
+}
+
+.list-group-item:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Lighten row on hover */
+}
+
+.bg-dark {
+  background-color: #1e1f22 !important; /* Ensure dark background for Bootstrap elements */
+}
+
+.modal {
+  position: fixed; /* Position the modal */
+  z-index: 1; /* Layering */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width for the overlay */
+  height: 100%; /* Full height for the overlay */
+  overflow: auto; /* Enable scrolling if needed */
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent overlay for modal */
+}
+
+.modal-content {
+  background-color: #1e1f22; /* Modal background */
+  margin: 15% auto; /* Center the modal vertically */
+  padding: 20px; /* Padding inside modal */
+  border: 1px solid #888; /* Border for modal */
+  width: 40%; /* Set width for the modal to 40% of the viewport width */
+  border-radius: 5px; /* Rounded corners */
+}
+
+.close {
+  color: white; /* Close button color */
+  float: right; /* Position close button to the right */
+  font-size: 28px; /* Close button size */
+  font-weight: bold; /* Close button font weight */
+}
+
+.close:hover,
+.close:focus {
+  color: red; /* Change color on hover */
+  text-decoration: none; /* Remove underline on hover */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Icon hover effect */
+.icon-hover {
+  color: white; /* Default icon color */
+  transition: color 0.3s ease; /* Smooth transition */
+}
+
+.icon-hover:hover {
+  color: #ccc; /* Change to a lighter gray on hover */
+}
+
+.close {
+  position: absolute; /* Position it at the top right */
+  right: 10px; /* Space from the right */
+  top: 10px; /* Space from the top */
+  cursor: pointer; /* Pointer cursor */
+  transition: color 0.3s; /* Smooth color transition */
+}
+
+.close:hover {
+  color: red; /* Change color on hover */
+}
