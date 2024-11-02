@@ -1,6 +1,0 @@
-[submodule "final"]
-	path = final
-	url = https://github.com/Nickslp/final.git
-[submodule "frontend"]
-	path = frontend
-	url = https://github.com/Nickslp/frontend.git
