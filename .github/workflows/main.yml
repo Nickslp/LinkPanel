@@ -46,8 +46,10 @@ jobs:
             linkpanel:
               driver: local" > docker-compose.yml
 
-      # Start services using Docker Compose in the foreground
-      - name: Start LinkPanel with Docker Compose
-        run: docker-compose up  # Removed -d to run in the foreground
+      # Optional: Wait before starting the container
+      - name: Wait Before Starting Container
+        run: sleep 5  # Adjust this if needed
 
-      # Note: No need for separate log following step as logs will be printed live
+      # Start services using Docker Compose
+      - name: Start LinkPanel with Docker Compose
+        run: docker-compose up
