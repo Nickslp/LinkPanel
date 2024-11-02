@@ -12,7 +12,8 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Define the base URL as a constant
-const BASE_URL = 'http://localhost:8080';
+const loc = window.location;
+const BASE_URL = loc.protocol + '//' + loc.hostname + (loc.port ? ':' + loc.port : '');
 
 function App() {
   const [links, setLinks] = useState([]);
