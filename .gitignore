@@ -1,0 +1,14 @@
+# Ignore node_modules directory
+./frontend/node_modules
+./LinkPanel/node_modules
+
+# Ignore log files
+*.log
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
