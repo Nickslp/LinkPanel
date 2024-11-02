@@ -1,26 +1,20 @@
-# GitHub Actions workflow to set up Docker, install Docker Compose, and run LinkPanel
-
 name: LinkPanel Docker Deployment
 
 on:
   push:
-    branches: ["master"]
-  pull_request:
-    branches: ["master"]
-
-permissions:
-  contents: read
+    branches:
+      - master  # Specify the branch that triggers this workflow
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
 
     steps:
       # Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Set up Docker
+      # Set up Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -35,7 +29,8 @@ jobs:
       # Create docker-compose.yml file
       - name: Set up Docker Compose file
         run: |
-          echo "services:
+          echo "version: '3.8'
+          services:
             app:
               image: nickslp/linkpanel:latest
               ports:
@@ -51,10 +46,8 @@ jobs:
             linkpanel:
               driver: local" > docker-compose.yml
 
-      # Start services using Docker Compose
+      # Start services using Docker Compose in the foreground
       - name: Start LinkPanel with Docker Compose
-        run: docker-compose up -d
+        run: docker-compose up  # Removed -d to run in the foreground
 
-      # Verify the container is running
-      - name: Verify container is running
-        run: docker-compose ps
+      # Note: No need for separate log following step as logs will be printed live
