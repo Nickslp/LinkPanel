@@ -1,12 +1,6 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+# GitHub Actions workflow to set up Docker and run LinkPanel using Docker Compose
 
-# This workflow will install Deno then run `deno lint` and `deno test`.
-# For more information see: https://github.com/denoland/setup-deno
-
-name: Deno
+name: LinkPanel Docker Deployment
 
 on:
   push:
@@ -18,25 +12,41 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup repo
+      # Checkout the repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Deno
-        # uses: denoland/setup-deno@v1
-        uses: denoland/setup-deno@61fe2df320078202e33d7d5ad347e7dcfa0e8f31  # v1.1.2
-        with:
-          deno-version: v1.x
+      # Set up Docker
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-      # Uncomment this step to verify the use of 'deno fmt' on each commit.
-      # - name: Verify formatting
-      #   run: deno fmt --check
+      # Create docker-compose.yml file
+      - name: Set up Docker Compose file
+        run: |
+          echo "services:
+            app:
+              image: nickslp/linkpanel:latest
+              ports:
+                - '8080:8080'
+              environment:
+                - PORT=8080
+                - DEBUG_MODE=true
+                - PLAIN_PASSWORD=changeme
+              volumes:
+                - linkpanel:/home/node/app/data
 
-      - name: Run linter
-        run: deno lint
+          volumes:
+            linkpanel:
+              driver: local" > docker-compose.yml
 
-      - name: Run tests
-        run: deno test -A
+      # Start services using Docker Compose
+      - name: Start LinkPanel with Docker Compose
+        run: docker-compose up -d
+
+      # Verify the container is running
+      - name: Verify container is running
+        run: docker-compose ps
