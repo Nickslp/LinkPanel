@@ -10,19 +10,17 @@ LinkPanel is a simple web application that allows you to create and manage a lis
 
 ## Installation
 
-LinkPanel is designed to be used primarily in Docker, but the Express.js webserver can be used on it's own just fine.
+LinkPanel is primarily designed to be used in Docker, though you can also run the Express.js web server on its own.
 
 ### Docker ([DockerHub](https://hub.docker.com/repository/docker/nickslp/linkpanel/))
 
 #### Prerequisites
 
-Make sure Docker and Docker Compose are installed on your system. You can download Docker from Docker's official website. Docker Compose is included with Docker Desktop on Windows and Mac, but for Linux, you may need to install it separately.
-
-
+Ensure Docker and Docker Compose are installed on your system. You can download Docker from [Docker's official website](https://www.docker.com). Docker Compose is included with Docker Desktop on Windows and Mac, but for Linux, you may need to install it separately.
 
 The easiest way to create a Docker container with LinkPanel is using docker-compose.yml.
 
-#### Step 1: Create a docker-compose.yml File
+#### Step 1: Create a docker-compose.yml file
 In the directory where you want to set up LinkPanel, create a file named `docker-compose.yml` with the following content:
 
 ```
@@ -43,11 +41,11 @@ volumes:
     driver: local
 ```
 
-If you need to change the port, please be aware that you need to change booth the containers port and also the port in the enviroment variables.
+Note: If you need to change the port, make sure to update both the container's port and the port in the environment variables.
 
 #### Step 2: Start the Docker Compose Setup
 
-After creating your `docker-compose.yml`, run it using  
+After creating your `docker-compose.yml`, start the setup with the following command:
 ```
 docker-compose up -d
 ```
@@ -78,12 +76,12 @@ docker-compose logs -f
 
 #### Clean Up
 
-If you need to remove all data and start fresh, you can delete the linkpanel volume with:
+If you need to remove all data and start fresh, you can delete the `linkpanel` volume with:
 ```
 docker-compose down -v
 ```
 
-### Outside of a Docker container
+### Running LinkPanel Outside of Docker
 
 1. Clone the [repository](https://github.com/Nickslp/LinkPanel):
    ```
