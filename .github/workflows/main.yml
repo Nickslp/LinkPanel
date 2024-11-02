@@ -46,10 +46,18 @@ jobs:
             linkpanel:
               driver: local" > docker-compose.yml
 
-      # Optional: Wait before starting the container
-      - name: Wait Before Starting Container
-        run: sleep 5  # Adjust this if needed
-
       # Start services using Docker Compose
       - name: Start LinkPanel with Docker Compose
-        run: docker-compose up
+        run: docker-compose up -d  # Start in detached mode
+
+      # Wait for 1 minute to keep the container running
+      - name: Wait for 1 minute
+        run: sleep 60  # Wait for 60 seconds
+
+      # Display the logs from the container
+      - name: Show container logs
+        run: docker-compose logs -f app  # Follow logs for the app service
+
+      # Stop the services
+      - name: Stop LinkPanel
+        run: docker-compose down
