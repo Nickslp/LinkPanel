@@ -8,6 +8,9 @@ LinkPanel is a simple web application that allows you to create and manage a lis
 - **Edit Links**: Modify existing links to keep your list updated.
 - **Delete Links**: Remove links that are no longer needed.
 
+  Example build using Docker, Portainer and Nginx-Proxy-Manager:
+  [LinkPanel](https://linkpanel.nickslp.me)
+
 ## Installation
 
 LinkPanel is primarily designed to be used in Docker, though you can also run the Express.js web server on its own.
